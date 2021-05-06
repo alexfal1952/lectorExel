@@ -99,6 +99,7 @@
 		        break;
 		}
 	}
+	echo "son ".count($arreglo);
 	//<div class="card col-sm-2" style="width: 18rem;">
 ?>
 <!DOCTYPE html>
@@ -138,7 +139,15 @@
 			  </div>
 			  <div class="card-body">
 			    <h5 class="card-title">Personas</h5>
-			    <p class="card-text">La Ultima Actualizacion fue <?php echo $fechaTxt;?></p>
+			    <p class="card-text">
+				 <?php 
+					if(count($arreglo==0)){
+						echo "tienes que cargar archivos";
+					}else{ 
+						echo "La ultima actualizacion fue". $fechaTxt;
+					}
+					?>
+			   </p>
 					<form action="suburArchivo.php" method="post" enctype="multipart/form-data" class="form">
 					
 							<div class="input-group  col-sm-4">

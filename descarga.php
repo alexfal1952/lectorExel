@@ -1,7 +1,7 @@
 <?php
 	$array = $_POST['arreglo'];
 	var_dump($array);
-
+	count($array);
 	//Agregamos la libreria para leer
 	require 'Classes/PHPExcel/IOFactory.php';
 	
