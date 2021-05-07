@@ -1,7 +1,35 @@
 <?php
-	$array = $_POST['arreglo'];
-	var_dump($array);
-	count($array);
+	
+	$fp = fopen ("carga.csv","r");
+	$arreglo= array();
+	$contar=0;
+	while ($data = fgetcsv ($fp, 1000, ";")) {
+		if ($contar!=0) {
+			$datos = explode(",", $data[0]);
+			$rut=str_replace('.', '',str_replace('-', '', $datos[3]));
+			if($rut<>"175270914"){
+				$arreglo[$rut] = array(
+										"curso"=>$datos[1],
+										"rut"=>$rut,
+										"nombre"=>$datos[2],
+										"fecha"=>$datos[0],
+										"numFamilia"=>$datos[4],
+										"numEstudiante"=>$datos[5],
+										"computadora"=>$datos[6],
+										"tablet"=>$datos[7],
+										"celular"=>$datos[8],
+										"impresora"=>$datos[9],
+										"horatio"=>$datos[10],
+										"externo"=>$datos[11],
+										"internet"=>$datos[12],
+										"estado"=>$datos[13],
+
+									);
+			}
+		}
+		$contar++;		
+	}
+	fclose ($fp);
 	//Agregamos la libreria para leer
 	require 'Classes/PHPExcel/IOFactory.php';
 	
@@ -13,7 +41,7 @@
 	$objPHPExcel->setActiveSheetIndex(0);
 	$lineas=10;
 	$cod=1;
-	foreach ($array as $key) {
+	foreach ($arreglo as $key) {
 		$objPHPExcel->getActiveSheet()->SetCellValue('A'.$lineas,$cod);
 		$objPHPExcel->getActiveSheet()->SetCellValue('B'.$lineas,$key["nombre"]);
 		$objPHPExcel->getActiveSheet()->SetCellValue('C'.$lineas,$key["numFamilia"]);

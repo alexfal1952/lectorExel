@@ -206,14 +206,11 @@
 			$("#btnEnviar").attr('disabled',false);
 		}	
 	});
-
-
 	$(document).ready(function() {
     	$('#tabla').DataTable();
 	} );
-	var datos = <?= json_encode($arreglo) ?>;
 	$(document).on('click', '#botonCarga', function(event) {
-		$.post('descarga.php', {arreglo: datos}, function(data) {
+		$.post('descarga.php', {}, function(data) {
 			window.open('descarga.xlsx', 'Download');
 		});
 	});
